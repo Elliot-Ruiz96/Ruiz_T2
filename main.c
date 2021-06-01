@@ -39,7 +39,7 @@ int main(void) {
 	CLOCK_EnableClock(kCLOCK_PortC);				// Switch 2
 	CLOCK_EnableClock(kCLOCK_PortE);				// Green LED
 
-	//  Funcion de GPIO
+	// Funcion de GPIO
 
 	PORT_SetPinMux(PORTB, PIN21, kPORT_MuxAsGpio); 	// Blue LED GPIO
 	PORT_SetPinMux(PORTB, PIN22, kPORT_MuxAsGpio); 	// Red LED GPIO
