@@ -59,17 +59,21 @@ int main(void) {
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
-	uint8_t Switch2 = 0;											//
-	uint8_t Switch3 = 0;											//
+	uint8_t Switch2 = false;											//
+	uint8_t Switch3 = false;											//
 
     while(1){
 
-    	Switch2 = GPIO_PinRead(GPIOC, PIN4);
-    	Switch3 = GPIO_PinRead(GPIOA, PIN6);
+    	Switch2 = GPIO_PinRead(GPIOC, PIN6);
+    	Switch3 = GPIO_PinRead(GPIOA, PIN4);
+
+    	printf("%d\n", Switch2);
+    	printf("%d\n", Switch3);
+
 
     	int i = 0;
 
-    	if(Switch2)
+    	if(!Switch2)
     	{
 
     		i = i + 1 ;
@@ -80,7 +84,7 @@ int main(void) {
     		}
     	}
 
-    	else if(Switch3)
+    	else if(!Switch3)
     	{
     		i = i - 1;
 
@@ -90,7 +94,7 @@ int main(void) {
     		}
     	}
 
-    	else if(Switch2 && Switch3){
+    	else if(!Switch2 && !Switch3){
     		i = 6;
     	}
 
