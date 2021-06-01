@@ -26,17 +26,6 @@ gpio_pin_config_t sw_config = {
        0,
    };
 
-void PORTA_PressButton(void){
-	GPIO_PortClearInterruptFlags(GPIOA, 1U << PIN4);
-	Switch2 = true;
-	SDK_ISR_EXIT_BARRIER;
-}
-
-void PORTC_PressButton(void){
-	GPIO_PortClearInterruptFlags(GPIOC, 1U << PIN6);
-	Switch3 = true;
-	SDK_ISR_EXIT_BARRIER;
-}
 
 int main(void) {
 
@@ -86,37 +75,80 @@ int main(void) {
 
     while(1){
 
-    	GPIO_PinRead(GPIOA, PIN4);
-    	GPIO_PinRead(GPIOC, PIN6);
+    	int i=2;
 
-    	GPIO_PortClear(GPIOE, 1u << PIN26);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-    	GPIO_PortSet(GPIOE, 1u << PIN26);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    	if(Switch2)
+    	{
+    		i++;
 
-    	GPIO_PortClear(GPIOB, 1u << PIN21);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-    	GPIO_PortSet(GPIOB, 1u << PIN21);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		if(i>4){
+    			i = 0;
+    		}
+    		Switch2 = false;
+    	}
 
-    	GPIO_PortClear(GPIOB, 1u << PIN21);
-    	GPIO_PortClear(GPIOB, 1u << PIN22);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-    	GPIO_PortSet(GPIOB, 1u << PIN21);
-    	GPIO_PortSet(GPIOB, 1u << PIN22);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    	else if(Switch3)
+    	{
+    		i--;
+    		if(i<0){
+    			i = 4;
+    		}
+    		Switch3 = false;
+    	}
 
-    	GPIO_PortClear(GPIOB, 1u << PIN22);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-    	GPIO_PortSet(GPIOB, 1u << PIN22);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    	else if(Switch2 && Switch3){
+    		i = 5;
+    		Switch2 = false;
+    		Switch3 = false;
+    	}
 
-    	GPIO_PortClear(GPIOB, 1u << PIN22);
-    	GPIO_PortClear(GPIOE, 1u << PIN26);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-    	GPIO_PortSet(GPIOB, 1u << PIN22);
-    	GPIO_PortSet(GPIOE, 1u << PIN26);
-    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    	switch (i){
+
+    	case 0:
+        	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		break;
+    	case 1:
+        	GPIO_PortClear(GPIOB, 1u << PIN21);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN21);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		break;
+    	case 2:
+        	GPIO_PortClear(GPIOB, 1u << PIN21);
+        	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN21);
+        	GPIO_PortSet(GPIOB, 1u << PIN22);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		break;
+    	case 3:
+        	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN22);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		break;
+    	case 4:
+        	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN22);
+        	GPIO_PortSet(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		break;
+    	case 6:
+        	GPIO_PortClear(GPIOB, 1u << PIN21);
+        	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN21);
+        	GPIO_PortSet(GPIOB, 1u << PIN22);
+        	GPIO_PortSet(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		break;
+    	}
 
     }
     return 0 ;
