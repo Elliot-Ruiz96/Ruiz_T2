@@ -10,6 +10,9 @@
 #define	PIN22		22u
 #define PIN26		26u
 
+#define CORE_FREQ	21000000u
+#define DELAY		1000000u
+
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
         1,
@@ -56,8 +59,10 @@ int main(void) {
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
-	uint8_t Switch2 = false;											//
-	uint8_t Switch3 = false;											//
+	uint8_t Switch2;
+	uint8_t Switch3;
+
+	int i = 0;
 
     while(1){
 
@@ -67,14 +72,12 @@ int main(void) {
     	printf("%d\n", Switch2);
     	printf("%d\n", Switch3);
 
-    	int i = 0;
-
     	if(!Switch2)
     	{
 
     		i = i + 1 ;
 
-    		if(i > 4){
+    		if(i > 6){
 
     			i = 0;
     		}
@@ -91,44 +94,50 @@ int main(void) {
     	}
 
     	else if(!Switch2 && !Switch3){
-    		i = 6;
+    		i = 5;
     	}
 
     	switch (i){
 
     	case 0:
         	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
 
     	case 1:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
     		break;
 
     	case 2:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
     		break;
 
     	case 3:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
     		break;
 
     	case 4:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
 
-    	case 6:
+    	case 5:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
