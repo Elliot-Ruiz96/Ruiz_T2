@@ -1,3 +1,3 @@
 # Ruiz_T2
  
-Prueba de colores con Switch -> Case
+Modificación para mantener el último registro del botón
