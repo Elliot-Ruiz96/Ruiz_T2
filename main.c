@@ -52,7 +52,7 @@ int main(void) {
 	PORT_SetPinConfig(PORTA, PIN4, &sw_in_config);					// Activacion de Switch 3
 	PORT_SetPinConfig(PORTC, PIN6, &sw_in_config);					// Activacion de Switch 2
 
-	GPIO_PinInit(GPIOB, PIN22, &led_config);
+	GPIO_PinInit(GPIOB, PIN22, &led_config);						// Inicialziar Pin usado por la tarjeta
 	GPIO_PinInit(GPIOB, PIN21, &led_config);
 	GPIO_PinInit(GPIOE, PIN26, &led_config);
 
