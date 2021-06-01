@@ -18,12 +18,12 @@ gpio_pin_config_t led_config = {
         1,
     };
 
-gpio_pin_config_t sw2_config = {
+port_pin_config_t sw2_config = {
        kGPIO_DigitalInput,
        0,
    };
 
-gpio_pin_config_t sw3_config = {
+port_pin_config_t sw3_config = {
        kGPIO_DigitalInput,
        0,
    };
