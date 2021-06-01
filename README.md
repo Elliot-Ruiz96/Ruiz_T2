@@ -1,3 +1,3 @@
 # Ruiz_T2
  
-Prueba de botones
+Prueba de colores con Switch -> Case
