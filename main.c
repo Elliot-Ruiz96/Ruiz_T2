@@ -13,9 +13,6 @@
 #define CORE_FREQ	21000000u
 #define DELAY		1000000u
 
-uint8_t Switch2 = 0;
-uint8_t Switch3 = 0;
-
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
         1,
@@ -62,36 +59,39 @@ int main(void) {
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
+	uint8_t Switch2 = 0;											//
+	uint8_t Switch3 = 0;											//
+
     while(1){
 
     	Switch2 = GPIO_PinRead(GPIOC, PIN4);
     	Switch3 = GPIO_PinRead(GPIOA, PIN6);
 
-    	int i = 6;
+    	int i = 0;
 
-    	if(Switch2)
+    	if(!Switch2)
     	{
-    		i++;
 
-    		if(i>4){
+    		i = i + 1 ;
+
+    		if(i > 4){
+
     			i = 0;
     		}
-    		Switch2 = false;
     	}
 
-    	else if(Switch3)
+    	else if(!Switch3)
     	{
-    		i--;
-    		if(i<0){
+    		i = i - 1;
+
+    		if(i <0 ){
+
     			i = 4;
     		}
-    		Switch3 = false;
     	}
 
-    	else if(Switch2 && Switch3){
+    	else if((!Switch2) && (Switch3)){
     		i = 6;
-    		Switch2 = false;
-    		Switch3 = false;
     	}
 
     	switch (i){
@@ -102,12 +102,14 @@ int main(void) {
         	GPIO_PortSet(GPIOE, 1u << PIN26);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		break;
+
     	case 1:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		break;
+
     	case 2:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortClear(GPIOB, 1u << PIN22);
@@ -116,12 +118,14 @@ int main(void) {
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		break;
+
     	case 3:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		break;
+
     	case 4:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortClear(GPIOE, 1u << PIN26);
@@ -130,6 +134,7 @@ int main(void) {
         	GPIO_PortSet(GPIOE, 1u << PIN26);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		break;
+
     	case 6:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortClear(GPIOB, 1u << PIN22);
@@ -140,6 +145,7 @@ int main(void) {
         	GPIO_PortSet(GPIOE, 1u << PIN26);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		break;
+
     	}
 
     }
