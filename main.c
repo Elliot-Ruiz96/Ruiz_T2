@@ -13,6 +13,9 @@
 #define CORE_FREQ	21000000u
 #define DELAY		1000000u
 
+uint8_t Switch2 = 0;
+uint8_t Switch3 = 0;
+
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
         1,
@@ -22,6 +25,18 @@ gpio_pin_config_t sw_config = {
        kGPIO_DigitalInput,
        0,
    };
+
+void PORTA_PressButton(void){
+	GPIO_PortClearInterruptFlags(GPIOA, 1U << PIN4);
+	Switch2 = true;
+	SDK_ISR_EXIT_BARRIER;
+}
+
+void PORTC_PressButton(void){
+	GPIO_PortClearInterruptFlags(GPIOC, 1U << PIN6);
+	Switch3 = true;
+	SDK_ISR_EXIT_BARRIER;
+}
 
 int main(void) {
 
@@ -70,6 +85,9 @@ int main(void) {
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
     while(1){
+
+    	GPIO_PinRead(GPIOA, PIN4);
+    	GPIO_PinRead(GPIOC, PIN6);
 
     	GPIO_PortClear(GPIOE, 1u << PIN26);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
