@@ -76,29 +76,36 @@ int main(void) {
 
     while(1){
 
-    	GPIO_PortClear(GPIOE, 1u << PIN26);
+    	GPIO_PortClear(GPIOE, 1u << PIN26);					// GREEN
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     	GPIO_PortSet(GPIOE, 1u << PIN26);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 
-    	GPIO_PortClear(GPIOB, 1u << PIN21);
+    	GPIO_PortClear(GPIOB, 1u << PIN21);					// BLUE
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     	GPIO_PortSet(GPIOB, 1u << PIN21);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 
-    	GPIO_PortClear(GPIOB, 1u << PIN21);
+    	GPIO_PortClear(GPIOB, 1u << PIN21);					// PURPLE
     	GPIO_PortClear(GPIOB, 1u << PIN22);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     	GPIO_PortSet(GPIOB, 1u << PIN21);
     	GPIO_PortSet(GPIOB, 1u << PIN22);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 
-    	GPIO_PortClear(GPIOB, 1u << PIN22);
+    	GPIO_PortClear(GPIOB, 1u << PIN22);					// RED
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     	GPIO_PortSet(GPIOB, 1u << PIN22);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 
-    	GPIO_PortClear(GPIOB, 1u << PIN22);
+    	GPIO_PortClear(GPIOB, 1u << PIN22);					// YELLOW
+    	GPIO_PortClear(GPIOE, 1u << PIN26);
+    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    	GPIO_PortSet(GPIOB, 1u << PIN22);
+    	GPIO_PortSet(GPIOE, 1u << PIN26);
+    	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+
+    	GPIO_PortClear(GPIOB, 1u << PIN22);					// WHITE
     	GPIO_PortClear(GPIOE, 1u << PIN26);
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     	GPIO_PortSet(GPIOB, 1u << PIN22);
