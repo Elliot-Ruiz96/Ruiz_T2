@@ -18,12 +18,7 @@ gpio_pin_config_t led_config = {
         1,
     };
 
-port_pin_config_t sw2_config = {
-       kGPIO_DigitalInput,
-       0,
-   };
-
-port_pin_config_t sw3_config = {
+port_pin_config_t sw_config = {
        kGPIO_DigitalInput,
        0,
    };
@@ -71,8 +66,8 @@ int main(void) {
 	GPIO_PinInit(GPIOB, PIN22, &led_config);
 	GPIO_PinInit(GPIOB, PIN21, &led_config);
 	GPIO_PinInit(GPIOE, PIN26, &led_config);
-	GPIO_PinInit(GPIOA, PIN4, &sw3_config);
-	GPIO_PinInit(GPIOC, PIN6, &sw2_config);
+	GPIO_PinInit(GPIOA, PIN4, &sw_config);
+	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
     while(1){
 
