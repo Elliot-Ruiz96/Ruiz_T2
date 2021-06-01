@@ -13,9 +13,6 @@
 #define CORE_FREQ	21000000u
 #define DELAY		1000000u
 
-uint8_t Switch2 = 0;
-uint8_t Switch3 = 0;
-
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
         1,
@@ -27,27 +24,17 @@ gpio_pin_config_t sw_config = {
    };
 
 
+const port_pin_config_t sw_in_config = {
+	    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
+	    kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
+	    kPORT_PassiveFilterDisable,                              /* Passive filter is disabled */
+	    kPORT_OpenDrainDisable,                                  /* Open drain is disabled */
+	    kPORT_HighDriveStrength,                                 /* High drive strength is configured */
+	    kPORT_MuxAsGpio,                                         /* Pin is configured as PTA4 */
+	    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
+	  };
+
 int main(void) {
-
-	const port_pin_config_t porta_pin4_config = {
-		    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
-		    kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
-		    kPORT_PassiveFilterDisable,                              /* Passive filter is disabled */
-		    kPORT_OpenDrainDisable,                                  /* Open drain is disabled */
-		    kPORT_HighDriveStrength,                                 /* High drive strength is configured */
-		    kPORT_MuxAsGpio,                                         /* Pin is configured as PTA4 */
-		    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
-		  };
-
-	const port_pin_config_t portc_pin6_config = {
-			kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
-			kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
-			kPORT_PassiveFilterDisable,                              /* Passive filter is disabled */
-			kPORT_OpenDrainDisable,                                  /* Open drain is disabled */
-			kPORT_HighDriveStrength,                                 /* High drive strength is configured */
-			kPORT_MuxAsGpio,                                         /* Pin is configured as PTA4 */
-			kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
-			  };
 
 	// Habilitamos los relojes de los Puertos a usar
 
@@ -61,21 +48,23 @@ int main(void) {
 	PORT_SetPinMux(PORTB, PIN21, kPORT_MuxAsGpio); 					// Blue LED GPIO
 	PORT_SetPinMux(PORTB, PIN22, kPORT_MuxAsGpio); 					// Red LED GPIO
 	PORT_SetPinMux(PORTE, PIN26, kPORT_MuxAsGpio); 					// Green LED GPIO
-	PORT_SetPinMux(PORTA, PIN4, kPORT_MuxAsGpio); 					// Switch 3 GPIO
-	PORT_SetPinMux(PORTC, PIN6, kPORT_MuxAsGpio); 					// Switch 2 GPIO
 
-	PORT_SetPinConfig(PORTA, PIN4, &porta_pin4_config);				// Activacion de Switch 3
-	PORT_SetPinConfig(PORTC, PIN6, &portc_pin6_config);				// Activacion de Switch 2
+	PORT_SetPinConfig(PORTA, PIN4, &sw_in_config);					// Activacion de Switch 3
+	PORT_SetPinConfig(PORTC, PIN6, &sw_in_config);					// Activacion de Switch 2
 
 	GPIO_PinInit(GPIOB, PIN22, &led_config);
 	GPIO_PinInit(GPIOB, PIN21, &led_config);
 	GPIO_PinInit(GPIOE, PIN26, &led_config);
+
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
     while(1){
 
-    	int i=2;
+    	Switch2 = GPIO_PinRead(GPIOC, PIN4);
+    	Switch3 = GPIO_PinRead(GPIOA, PIN6);
+
+    	int i = 6;
 
     	if(Switch2)
     	{
@@ -97,7 +86,7 @@ int main(void) {
     	}
 
     	else if(Switch2 && Switch3){
-    		i = 5;
+    		i = 6;
     		Switch2 = false;
     		Switch3 = false;
     	}
