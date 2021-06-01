@@ -13,6 +13,9 @@
 #define CORE_FREQ	21000000u
 #define DELAY		1000000u
 
+uint8_t Switch2 = 0;
+uint8_t Switch3 = 0;
+
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
         1,
