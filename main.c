@@ -13,6 +13,16 @@
 #define CORE_FREQ	21000000u
 #define DELAY		1000000u
 
+typedef enum{
+
+	GREEN,
+	BLUE,
+	PURPLE,
+	RED,
+	YELLOW,
+	WHITE,
+}; State_Color;
+
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
         1,
