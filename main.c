@@ -61,20 +61,35 @@ int main(void) {
 
 	uint8_t Switch2;
 	uint8_t Switch3;
-
-	int i = 0;														// Cambiar a unit8_t
+	int i = 0;
 
     while(1){
 
-    	Switch2 = GPIO_PinRead(GPIOC, PIN6);
-    	Switch3 = GPIO_PinRead(GPIOA, PIN4);						// Uso de banderas para estado
+    	printf("%d", Switch2);
+    	printf("%d", Switch3);
+    	printf("%d", i);
 
-    	if(!Switch2)
+    	Switch2 = GPIO_PinRead(GPIOC, PIN6);
+    	Switch3 = GPIO_PinRead(GPIOA, PIN4);
+
+    	if( Switch2 == 0 && Switch3 == 0 ){
+
+        	GPIO_PortClear(GPIOB, 1u << PIN21);
+        	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN21);
+        	GPIO_PortSet(GPIOB, 1u << PIN22);
+        	GPIO_PortSet(GPIOE, 1u << PIN26);
+
+    	}
+
+    	else if(!Switch2)
     	{
 
     		i = i + 1 ;
 
-    		if(i > 6){												// Evitar usar variables crudas
+    		if(i > 4){												// Evitar usar variables crudas
 
     			i = 0;
     		}
@@ -88,10 +103,6 @@ int main(void) {
 
     			i = 4;
     		}
-    	}
-
-    	else if(!Switch2 && !Switch3){
-    		i = 5;
     	}
 
     	switch (i){
@@ -130,14 +141,7 @@ int main(void) {
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
 
-    	case 5:
-        	GPIO_PortClear(GPIOB, 1u << PIN21);
-        	GPIO_PortClear(GPIOB, 1u << PIN22);
-        	GPIO_PortClear(GPIOE, 1u << PIN26);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-        	GPIO_PortSet(GPIOB, 1u << PIN21);
-        	GPIO_PortSet(GPIOB, 1u << PIN22);
-        	GPIO_PortSet(GPIOE, 1u << PIN26);
+    	default:
     		break;
 
     	}
