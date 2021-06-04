@@ -13,7 +13,7 @@
 #define CORE_FREQ	21000000u
 #define DELAY		1000000u
 
-typedef enum{
+typedef enum{											// Variable enumerada
 
 	GREEN,
 	BLUE,
@@ -21,7 +21,8 @@ typedef enum{
 	RED,
 	YELLOW,
 	WHITE,
-}; State_Color;
+
+} State_Color;
 
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
@@ -69,14 +70,37 @@ int main(void) {
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
+	State_Color Current_State = GREEN;
+
 	uint8_t Switch2;
 	uint8_t Switch3;
 	uint8_t i = 0, MAX = 4, MIN = 0;
+	uint8_t SwitchTotal;
 
     while(1){
 
     	Switch2 = GPIO_PinRead(GPIOC, PIN6);
     	Switch3 = GPIO_PinRead(GPIOA, PIN4);
+
+    	Switch2 = Switch2 << 1;										// Corrimiento 0001 -> 0010
+    	SwitchTotal = Switch2 | Switch3;									// Bitwise OR
+
+    	switch (Current_State){
+    	case GREEN:
+    		break;
+    	case BLUE:
+    		break;
+    	case PURPLE:
+    		break;
+    	case RED:
+    		break;
+    	case YELLOW:
+    		break;
+    	case WHITE:
+    		break;
+    	default:
+    		break;
+    	}
 
     	if(!Switch2 && !Switch3){
 
