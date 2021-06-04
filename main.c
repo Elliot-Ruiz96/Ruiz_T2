@@ -62,20 +62,19 @@ int main(void) {
 	uint8_t Switch2;
 	uint8_t Switch3;
 
-	int i = 0;
+	int i = 0;														// Cambiar a unit8_t
 
     while(1){
 
     	Switch2 = GPIO_PinRead(GPIOC, PIN6);
     	Switch3 = GPIO_PinRead(GPIOA, PIN4);
 
-
     	if(!Switch2)
     	{
 
     		i = i + 1 ;
 
-    		if(i > 6){
+    		if(i > 6){												// Evitar usar variables crudas
 
     			i = 0;
     		}
@@ -97,7 +96,7 @@ int main(void) {
 
     	switch (i){
 
-    	case 0:
+    	case 0:																		// Cambiar numeros de case por color
         	GPIO_PortClear(GPIOE, 1u << PIN26);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
