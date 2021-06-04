@@ -69,22 +69,8 @@ int main(void) {
     	Switch2 = GPIO_PinRead(GPIOC, PIN6);
     	Switch3 = GPIO_PinRead(GPIOA, PIN4);
 
-    	printf("%d\n", Switch2);
-    	printf("%d\n", Switch3);
 
-    	if(!Switch2 && !Switch3){
-
-        	GPIO_PortClear(GPIOB, 1u << PIN21);
-        	GPIO_PortClear(GPIOB, 1u << PIN22);
-        	GPIO_PortClear(GPIOE, 1u << PIN26);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-        	GPIO_PortSet(GPIOB, 1u << PIN21);
-        	GPIO_PortSet(GPIOB, 1u << PIN22);
-        	GPIO_PortSet(GPIOE, 1u << PIN26);
-
-    	}
-
-    	else if(!Switch2)
+    	if(!Switch2)
     	{
 
     		i = i + 1 ;
@@ -105,6 +91,9 @@ int main(void) {
     		}
     	}
 
+    	else if(!Switch2 && !Switch3){
+    		i = 5;
+    	}
 
     	switch (i){
 
@@ -138,6 +127,16 @@ int main(void) {
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortClear(GPIOE, 1u << PIN26);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN22);
+        	GPIO_PortSet(GPIOE, 1u << PIN26);
+    		break;
+
+    	case 5:
+        	GPIO_PortClear(GPIOB, 1u << PIN21);
+        	GPIO_PortClear(GPIOB, 1u << PIN22);
+        	GPIO_PortClear(GPIOE, 1u << PIN26);
+        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+        	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
