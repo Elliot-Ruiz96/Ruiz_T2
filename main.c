@@ -101,7 +101,7 @@ int main(void) {
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
-
+    																			//Implementar uso de .h y .c para cada cambio de color
     	case 1:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
