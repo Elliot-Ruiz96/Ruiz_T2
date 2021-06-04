@@ -67,7 +67,7 @@ int main(void) {
     while(1){
 
     	Switch2 = GPIO_PinRead(GPIOC, PIN6);
-    	Switch3 = GPIO_PinRead(GPIOA, PIN4);
+    	Switch3 = GPIO_PinRead(GPIOA, PIN4);						// Uso de banderas para estado
 
     	if(!Switch2)
     	{
