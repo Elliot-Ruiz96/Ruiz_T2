@@ -61,7 +61,6 @@ int main(void) {
 
 	uint8_t Switch2;
 	uint8_t Switch3;
-
 	uint8_t i = 0;
 
     while(1){
