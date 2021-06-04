@@ -71,6 +71,7 @@ int main(void) {
 
     	printf("%d\n", Switch2);
     	printf("%d\n", Switch3);
+    	printf("%d\n", i);
 
     	if(!Switch2 && !Switch3){
 
@@ -87,9 +88,9 @@ int main(void) {
     	else if(!Switch2)
     	{
 
-    		i = i + 1 ;
+    		i++ ;
 
-    		if(i > 6){
+    		if(i > 4){
 
     			i = 0;
     		}
@@ -97,7 +98,7 @@ int main(void) {
 
     	else if(!Switch3)
     	{
-    		i = i - 1;
+    		i-- ;
 
     		if(i < 0 ){
 
@@ -140,6 +141,8 @@ int main(void) {
         	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
+    		break;
+    	default:
     		break;
 
     	}
