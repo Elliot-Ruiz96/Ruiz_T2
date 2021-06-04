@@ -61,16 +61,12 @@ int main(void) {
 
 	uint8_t Switch2;
 	uint8_t Switch3;
-	uint8_t i = 0;
+	uint8_t i = 0, MAX = 4, MIN = 0;
 
     while(1){
 
     	Switch2 = GPIO_PinRead(GPIOC, PIN6);
     	Switch3 = GPIO_PinRead(GPIOA, PIN4);
-
-    	printf("%d\n", Switch2);
-    	printf("%d\n", Switch3);
-    	printf("%d\n", i);
 
     	if(!Switch2 && !Switch3){
 
@@ -88,18 +84,18 @@ int main(void) {
 
     		i++ ;
 
-    		if(i > 4){
+    		if(i > MAX){
 
-    			i = 0;
+    			i = MIN;
     		}
     	}
 
     	else if(!Switch3){
     		i-- ;
 
-    		if(i < 0 ){
+    		if(i < MIN ){
 
-    			i = 4;
+    			i = MAX;
     		}
     	}
 
@@ -139,6 +135,7 @@ int main(void) {
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
+
     	default:
     		break;
 
