@@ -25,13 +25,13 @@ gpio_pin_config_t sw_config = {
 
 
 const port_pin_config_t sw_in_config = {
-	    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
-	    kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
-	    kPORT_PassiveFilterDisable,                              /* Passive filter is disabled */
-	    kPORT_OpenDrainDisable,                                  /* Open drain is disabled */
-	    kPORT_HighDriveStrength,                                 /* High drive strength is configured */
-	    kPORT_MuxAsGpio,                                         /* Pin is configured as PTA4 */
-	    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
+	    kPORT_PullUp,
+	    kPORT_FastSlewRate,
+	    kPORT_PassiveFilterDisable,
+	    kPORT_OpenDrainDisable,
+	    kPORT_HighDriveStrength,
+	    kPORT_MuxAsGpio,
+	    kPORT_UnlockRegister
 	  };
 
 int main(void) {
@@ -84,8 +84,7 @@ int main(void) {
 
     	}
 
-    	else if(!Switch2)
-    	{
+    	else if(!Switch2){
 
     		i++ ;
 
@@ -95,8 +94,7 @@ int main(void) {
     		}
     	}
 
-    	else if(!Switch3)
-    	{
+    	else if(!Switch3){
     		i-- ;
 
     		if(i < 0 ){
