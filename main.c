@@ -16,10 +16,7 @@
 #define TWO			0x02u
 #define THREE		0x03u
 
-#define CORE_FREQ	21000000u
-#define DELAY		1000000u
-
-typedef enum{											// Variable enumerada
+typedef enum{											// Variable ennumerada
 
 	GREEN,
 	BLUE,
@@ -94,7 +91,6 @@ int main(void) {
     	switch (Current_State){
     	case GREEN:
         	GPIO_PortClear(GPIOE, 1u << PIN26);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
         	if(ZERO == Switch_Total){
         		Current_State = WHITE;
@@ -114,7 +110,6 @@ int main(void) {
     		break;
     	case BLUE:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	if(ZERO == Switch_Total){
         		Current_State = WHITE;
@@ -135,7 +130,6 @@ int main(void) {
     	case PURPLE:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortClear(GPIOB, 1u << PIN22);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	if(ZERO == Switch_Total){
@@ -156,7 +150,6 @@ int main(void) {
     		break;
     	case RED:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	if(ZERO == Switch_Total){
         		Current_State = WHITE;
@@ -177,7 +170,6 @@ int main(void) {
     	case YELLOW:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortClear(GPIOE, 1u << PIN26);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
         	if(ZERO == Switch_Total){
@@ -200,44 +192,12 @@ int main(void) {
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortClear(GPIOE, 1u << PIN26);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
     		break;
     	default:
     		break;
-    	}
-
-    	if(!Switch2 && !Switch3){
-
-        	GPIO_PortClear(GPIOB, 1u << PIN21);
-        	GPIO_PortClear(GPIOB, 1u << PIN22);
-        	GPIO_PortClear(GPIOE, 1u << PIN26);
-        	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-        	GPIO_PortSet(GPIOB, 1u << PIN21);
-        	GPIO_PortSet(GPIOB, 1u << PIN22);
-        	GPIO_PortSet(GPIOE, 1u << PIN26);
-
-    	}
-
-    	else if(!Switch2){
-
-    		i++ ;
-
-    		if(i > MAX){
-
-    			i = MIN;
-    		}
-    	}
-
-    	else if(!Switch3){
-    		i-- ;
-
-    		if(i < MIN ){
-
-    			i = MAX;
-    		}
     	}
 
 
