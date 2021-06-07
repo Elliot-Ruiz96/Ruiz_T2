@@ -14,7 +14,6 @@
 #define ZERO		0x00u
 #define ONE			0x01u
 #define TWO			0x02u
-#define THREE		0x03u
 
 typedef enum{											// Variable ennumerada
 
@@ -91,39 +90,27 @@ int main(void) {
     	case GREEN:
         	GPIO_PortClear(GPIOE, 1u << PIN26);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
-        	if(ZERO == Switch_Total){
+        	if(ZERO == SwitchTotal){
         		Current_State = WHITE;
         	}
-        	else if(ONE){
+        	else if(ONE == SwitchTotal){
         		Current_State = BLUE;
         	}
-        	else if(TWO){
+        	else if(TWO == SwitchTotal){
         		Current_State = YELLOW;
-        	}
-        	else if(THREE){
-        		Current_State;
-        	}
-        	else{
-        		Current_State;
         	}
     		break;
     	case BLUE:
         	GPIO_PortClear(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
-        	if(ZERO == Switch_Total){
+        	if(ZERO == SwitchTotal){
         		Current_State = WHITE;
         	}
-        	else if(ONE){
+        	else if(ONE == SwitchTotal){
         		Current_State = PURPLE;
         	}
-        	else if(TWO){
+        	else if(TWO == SwitchTotal){
         		Current_State = GREEN;
-        	}
-        	else if(THREE){
-        		Current_State;
-        	}
-        	else{
-        		Current_State;
         	}
     		break;
     	case PURPLE:
@@ -131,39 +118,27 @@ int main(void) {
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
-        	if(ZERO == Switch_Total){
+        	if(ZERO == SwitchTotal){
         		Current_State = WHITE;
         	}
-        	else if(ONE){
+        	else if(ONE == SwitchTotal){
         		Current_State = RED;
         	}
-        	else if(TWO){
+        	else if(TWO == SwitchTotal){
         		Current_State = BLUE;
-        	}
-        	else if(THREE){
-        		Current_State;
-        	}
-        	else{
-        		Current_State;
         	}
     		break;
     	case RED:
         	GPIO_PortClear(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
-        	if(ZERO == Switch_Total){
+        	if(ZERO == SwitchTotal){
         		Current_State = WHITE;
         	}
-        	else if(ONE){
+        	else if(ONE == SwitchTotal){
         		Current_State = YELLOW;
         	}
-        	else if(TWO){
+        	else if(TWO == SwitchTotal){
         		Current_State = PURPLE;
-        	}
-        	else if(THREE){
-        		Current_State;
-        	}
-        	else{
-        		Current_State;
         	}
     		break;
     	case YELLOW:
@@ -171,20 +146,14 @@ int main(void) {
         	GPIO_PortClear(GPIOE, 1u << PIN26);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
-        	if(ZERO == Switch_Total){
+        	if(ZERO == SwitchTotal){
         		Current_State = WHITE;
         	}
-        	else if(ONE){
+        	else if(ONE == SwitchTotal){
         		Current_State = GREEN;
         	}
-        	else if(TWO){
+        	else if(TWO == SwitchTotal){
         		Current_State = RED;
-        	}
-        	else if(THREE){
-        		Current_State;
-        	}
-        	else{
-        		Current_State;
         	}
     		break;
     	case WHITE:
@@ -194,26 +163,18 @@ int main(void) {
         	GPIO_PortSet(GPIOB, 1u << PIN21);
         	GPIO_PortSet(GPIOB, 1u << PIN22);
         	GPIO_PortSet(GPIOE, 1u << PIN26);
+        	if(ZERO == SwitchTotal){
+        		Current_State = WHITE;
+        	}
+        	else if(ONE == SwitchTotal){
+        		Current_State = GREEN;
+        	}
+        	else if(TWO == SwitchTotal){
+        		Current_State = YELLOW;
+        	}
     		break;
     	default:
     		break;
-    	}
-
-
-    	switch (SwitchTotal){
-    	case 0:
-    		break;
-    	case 1:
-    		break;
-    	case 2:
-    		break;
-    	case 3:
-    		break;
-    	case 4:
-    		break;
-    	default:
-    		break;
-
     	}
 
     }
